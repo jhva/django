@@ -32,3 +32,5 @@ admin.site.register(Room)
   > SET_DEFAULT : default 로 값을 대체하게 되어 필드에 default=True 옵션이 있어야만 가능합니다.
   > SET : 대체할 값이나 함수를 지정합니다
   > DO_NOTHING : 아무 것도 하지 않지만 db 에서 오류가 발생할 수 있습니다.
+
+3
