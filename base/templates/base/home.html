@@ -1,14 +1,45 @@
 {% extends 'main.html' %} {% block content %}
-<h1>HOme Templates</h1>
-<div>
+<style>
+  .home-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+</style>
+
+<div class="home-container">
   <div>
-    {% for room in rooms%}
+    <h3>topic</h3>
+    <hr />
     <div>
-      <h5>
-        {{room.id}} -- <a href="{% url 'room' room.id %}"> {{room.name}} </a>
-      </h5>
+      <a href="{% url 'home' %}">All</a>
+    </div>
+    {% for topic in topics %}
+    <div>
+      <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
     </div>
     {% endfor %}
   </div>
+  <div>
+    <h5>{{room_count}} room 이용가능한방</h5>
+    <a href="{% url 'create-room' %}"> Cretae room</a>
+
+    <div>
+      {% for room in rooms%}
+      <div>
+        {% if request.user == room.host %}
+        <a href="{% url 'update-room' room.id %}">방 수정하기</a>
+        <a href="{% url 'delete-room' room.id %}">방 삭제하기</a>
+        {% endif %}
+        <span>@{{room.host.username}}</span>
+        <h5>
+          {{room.id}} -- <a href="{% url 'room' room.id %}"> {{room.name}} </a>
+        </h5>
+        <small>{{room.topic.name}}</small>
+        <hr />
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </div>
+
 {% endblock content %}

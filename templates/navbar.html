@@ -2,4 +2,13 @@
   <h1>Logo</h1>
 </a>
 
+<form action="{% url 'home' %}" method="GET">
+  <input type="text" name="q" placeholder="Search rooms..." />
+</form>
+
+{% if request.user.is_authenticated %}
+<a href="{% url 'logout' %}">로그아웃</a>
+{% else %}
+<a href="{% url 'login' %}">로그인하기</a>
+{% endif %}
 <hr />
